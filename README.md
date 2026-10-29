@@ -1,74 +1,71 @@
-# Code Quest — Price Tracking Web App
+# Code Quest — Team Task Management
 
-Code Quest is documented in this repository as a Java full-stack application for monitoring product prices from e-commerce pages. It uses scheduled checks and a browser dashboard to help users compare prices with target budgets.
+Code Quest is a Java full-stack Kanban-style task management application for organizing team work. Its stated goal is to help Agile teams move tasks through a workflow from **To Do** to **Done**, with REST APIs and a dynamic browser interface.
+
+> **Repository note:** This README reflects the repository's current description. Confirm the feature list and run commands against the source code before presenting them as verified.
 
 ## Features
 
-- **Product price extraction:** Jsoup parses price information from product pages.
-- **Scheduled monitoring:** Spring scheduling can run checks automatically.
-- **Target price tracking:** Compare extracted prices against a budget.
-- **Browser dashboard:** Thymeleaf and Bootstrap provide the interface.
-- **Local data storage:** H2 and Spring Data JPA support persistence.
+- **Kanban workflow:** Organize work across task states such as To Do, In Progress, and Done.
+- **Task state transitions:** Update workflow state through the application.
+- **REST API:** Backend endpoints support communication between the UI and server.
+- **Dynamic interface:** JavaScript Fetch API can communicate with backend endpoints without a full page reload.
+- **Persistence:** Spring Data JPA is listed in the project description for data access.
 
-## Tech stack
+## Technology stack
 
-| Area | Technology |
-| --- | --- |
-| Language | Java 17+ |
-| Backend | Spring Boot |
-| HTML parsing | Jsoup |
-| Data access | Spring Data JPA |
-| Database | H2 |
-| UI | Thymeleaf, Bootstrap |
-| Build tool | Maven |
+- **Language:** Java
+- **Backend:** Spring Boot
+- **Data access:** Spring Data JPA
+- **Frontend interaction:** JavaScript Fetch API
+- **Architecture:** RESTful API
+
+Add the exact database, build tool, and framework versions after verifying the project configuration files.
 
 ## Getting started
 
-### Prerequisites
+The current default branch listing available during this review did not expose application source or build files, so the correct setup command could not be verified here.
 
-- JDK 17 or newer
-- Git
-- Maven, if the project does not include the Maven Wrapper
+Once the source code is available, document these steps with confirmed commands:
 
-### 1. Clone the repository
+1. Install the required JDK and build tool.
+2. Clone this repository.
+3. Configure the database and application settings, if required.
+4. Run the application using the project's actual build configuration.
+5. Open the local URL printed by the application.
 
-```bash
-git clone https://github.com/parakandlabharath/Code-Quest.git
-cd Code-Quest
+## Screenshots and demo
+
+Add genuine screenshots of the running application here. Recommended screenshots:
+
+- The main Kanban board
+- A task creation or edit form
+- A task moving between workflow states
+
+Store images in a `screenshots/` directory and reference them using relative paths, for example:
+
+```md
+![Code Quest Kanban board](screenshots/kanban-board.png)
 ```
 
-### 2. Start the application
+Do not add mock screenshots that imply features work when they have not been tested.
 
-```bash
-mvn spring-boot:run
-```
+## Quality checklist
 
-If the repository includes the Maven Wrapper, use `./mvnw spring-boot:run` on macOS/Linux or `mvnw.cmd spring-boot:run` on Windows.
-
-### 3. Open the application
-
-Visit [http://localhost:8080](http://localhost:8080) after startup.
-
-## Usage
-
-1. Add a product and its page URL.
-2. Specify the CSS selector used to find the price.
-3. Set a target price.
-4. Review the tracked product information on the dashboard.
-
-## Important notes
-
-- Website markup can change, so selectors may need updating.
-- Some sites may block automated requests or have terms that limit scraping.
-- Confirm that the repository's current source code matches the features and commands described above.
+- [ ] Verify setup instructions on a clean clone.
+- [ ] Add screenshots captured from the running application.
+- [ ] Document API endpoints and example requests.
+- [ ] Add validation and error-handling tests.
+- [ ] Provide a `.env.example` or sample configuration without secrets, if needed.
+- [ ] Add a suitable `.gitignore` and license after checking the existing project files.
 
 ## Contributing
 
-1. Fork this repository.
+1. Fork the repository.
 2. Create a branch: `git checkout -b feature/your-change`.
 3. Commit your changes: `git commit -m "Describe your change"`.
 4. Push the branch and open a pull request.
 
 ## License
 
-See the [LICENSE](LICENSE) file if included in this repository.
+Add the appropriate license and link after confirming the project's licensing choice.
