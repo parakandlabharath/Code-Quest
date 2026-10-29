@@ -1,71 +1,68 @@
 # Code Quest — Team Task Management
 
-Code Quest is a Java full-stack Kanban-style task management application for organizing team work. Its stated goal is to help Agile teams move tasks through a workflow from **To Do** to **Done**, with REST APIs and a dynamic browser interface.
+Code Quest is described as a Java full-stack, Kanban-style task management application intended to help teams organize work across stages such as **To Do**, **In Progress**, and **Done**.
 
-> **Repository note:** This README reflects the repository's current description. Confirm the feature list and run commands against the source code before presenting them as verified.
+## Intended capabilities
 
-## Features
+- **Kanban workflow:** Organize tasks by status.
+- **Task updates:** Move tasks through the workflow.
+- **REST API:** Provide an interface for communication between the browser and backend.
+- **Dynamic UI:** Use browser-side JavaScript to communicate with backend endpoints.
+- **Data access:** Spring Data JPA is listed in the project description.
 
-- **Kanban workflow:** Organize work across task states such as To Do, In Progress, and Done.
-- **Task state transitions:** Update workflow state through the application.
-- **REST API:** Backend endpoints support communication between the UI and server.
-- **Dynamic interface:** JavaScript Fetch API can communicate with backend endpoints without a full page reload.
-- **Persistence:** Spring Data JPA is listed in the project description for data access.
+These capabilities and technologies should be confirmed against the implementation before being presented as tested.
 
-## Technology stack
+## Technology
 
 - **Language:** Java
 - **Backend:** Spring Boot
 - **Data access:** Spring Data JPA
 - **Frontend interaction:** JavaScript Fetch API
-- **Architecture:** RESTful API
+- **API style:** REST
 
-Add the exact database, build tool, and framework versions after verifying the project configuration files.
+Add exact versions, database details, and build tool information after checking the project configuration.
+
+## Project status
+
+The default branch currently exposes the README but not the application source or build files. A verified installation or run command cannot be provided until those files are committed.
 
 ## Getting started
 
-The current default branch listing available during this review did not expose application source or build files, so the correct setup command could not be verified here.
-
-Once the source code is available, document these steps with confirmed commands:
+When the source is available, document the verified steps here:
 
 1. Install the required JDK and build tool.
-2. Clone this repository.
+2. Clone the repository.
 3. Configure the database and application settings, if required.
-4. Run the application using the project's actual build configuration.
+4. Run the application using its actual build configuration.
 5. Open the local URL printed by the application.
 
 ## Screenshots and demo
 
-Add genuine screenshots of the running application here. Recommended screenshots:
+Add genuine screenshots from the running application to a `screenshots/` directory. Suggested views:
 
-- The main Kanban board
-- A task creation or edit form
+- Main Kanban board
+- Task creation or editing
 - A task moving between workflow states
 
-Store images in a `screenshots/` directory and reference them using relative paths, for example:
+Example Markdown for a real screenshot:
 
 ```md
 ![Code Quest Kanban board](screenshots/kanban-board.png)
 ```
 
-Do not add mock screenshots that imply features work when they have not been tested.
+## Next steps
 
-## Quality checklist
-
-- [ ] Verify setup instructions on a clean clone.
-- [ ] Add screenshots captured from the running application.
-- [ ] Document API endpoints and example requests.
+- [ ] Commit the application source and build configuration.
+- [ ] Verify setup on a clean clone.
+- [ ] Document API endpoints with example requests.
 - [ ] Add validation and error-handling tests.
-- [ ] Provide a `.env.example` or sample configuration without secrets, if needed.
-- [ ] Add a suitable `.gitignore` and license after checking the existing project files.
+- [ ] Add sample configuration without credentials or secrets.
+- [ ] Add screenshots captured from the running application.
+- [ ] Choose and document an appropriate license.
 
 ## Contributing
 
-1. Fork the repository.
-2. Create a branch: `git checkout -b feature/your-change`.
-3. Commit your changes: `git commit -m "Describe your change"`.
-4. Push the branch and open a pull request.
-
-## License
-
-Add the appropriate license and link after confirming the project's licensing choice.
+1. Create a branch: `git checkout -b feature/your-change`.
+2. Make a focused change.
+3. Commit with a descriptive message.
+4. Explain the change and testing in a pull request.
