@@ -1,56 +1,61 @@
 # Code Quest — Team Task Management
 
-Code Quest is described as a Java full-stack, Kanban-style task management application intended to help teams organize work across stages such as **To Do**, **In Progress**, and **Done**.
+<p align="center">
+  <img src="https://img.shields.io/badge/Java-Backend-orange?logo=openjdk&logoColor=white" alt="Java backend" />
+  <img src="https://img.shields.io/badge/Spring%20Boot-Backend-6DB33F?logo=springboot&logoColor=white" alt="Spring Boot" />
+  <img src="https://img.shields.io/badge/REST%20API-Integration-005571" alt="REST API" />
+  <img src="https://img.shields.io/badge/Status-In%20Development-blue" alt="Project status" />
+</p>
 
-## Intended capabilities
+Code Quest is a Java full-stack, Kanban-style task management project intended to help teams organize work across stages such as **To Do**, **In Progress**, and **Done**.
 
-- **Kanban workflow:** Organize tasks by status.
-- **Task updates:** Move tasks through the workflow.
-- **REST API:** Provide an interface for communication between the browser and backend.
-- **Dynamic UI:** Use browser-side JavaScript to communicate with backend endpoints.
-- **Data access:** Spring Data JPA is listed in the project description.
+## ✨ Intended features
 
-These capabilities and technologies should be confirmed against the implementation before being presented as tested.
+- **Kanban workflow** — organize tasks by status.
+- **Task updates** — move tasks through the workflow.
+- **REST API** — connect the frontend with backend endpoints.
+- **Browser interaction** — use JavaScript to communicate with the backend.
+- **Data access** — Spring Data JPA is listed in the project description.
 
-## Technology
+> Note: Confirm each feature against the current implementation before describing it as tested or complete.
 
-- **Language:** Java
-- **Backend:** Spring Boot
-- **Data access:** Spring Data JPA
-- **Frontend interaction:** JavaScript Fetch API
-- **API style:** REST
+## 🧰 Technology stack
 
-Add exact versions, database details, and build tool information after checking the project configuration.
+| Area | Technology |
+| --- | --- |
+| Language | Java |
+| Backend | Spring Boot |
+| Data access | Spring Data JPA |
+| Frontend interaction | JavaScript Fetch API |
+| API style | REST |
 
-## Project status
+## 🚀 Getting started
 
-The default branch currently exposes the README but not the application source or build files. A verified installation or run command cannot be provided until those files are committed.
+The default branch currently exposes this README, but does not expose the application source or build files. Add those files before publishing verified installation commands.
 
-## Getting started
+Once the source is committed:
 
-When the source is available, document the verified steps here:
-
-1. Install the required JDK and build tool.
-2. Clone the repository.
-3. Configure the database and application settings, if required.
+1. Clone this repository.
+2. Install the JDK and build tool required by the project.
+3. Configure the database and application settings, if needed.
 4. Run the application using its actual build configuration.
 5. Open the local URL printed by the application.
 
-## Screenshots and demo
+## 🖼️ Screenshots and demo
 
-Add genuine screenshots from the running application to a `screenshots/` directory. Suggested views:
+Add genuine screenshots from the running application to a `screenshots/` directory. Useful views include:
 
 - Main Kanban board
 - Task creation or editing
 - A task moving between workflow states
 
-Example Markdown for a real screenshot:
+Example for a real screenshot:
 
 ```md
 ![Code Quest Kanban board](screenshots/kanban-board.png)
 ```
 
-## Next steps
+## 🗺️ Roadmap
 
 - [ ] Commit the application source and build configuration.
 - [ ] Verify setup on a clean clone.
@@ -60,9 +65,9 @@ Example Markdown for a real screenshot:
 - [ ] Add screenshots captured from the running application.
 - [ ] Choose and document an appropriate license.
 
-## Contributing
+## 🤝 Contributing
 
-1. Create a branch: `git checkout -b feature/your-change`.
+1. Create a branch: `git checkout -b feature/your-change`
 2. Make a focused change.
 3. Commit with a descriptive message.
 4. Explain the change and testing in a pull request.
