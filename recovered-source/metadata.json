@@ -1,0 +1,6 @@
+{
+  "name": "CodeJester - Gamified Coding Playground",
+  "description": "A friendly and hilarious coding platform for beginners and pros with interactive tutorials, gamified puzzle challenges, AI coach hints, meme badges, and live leaderboards.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
