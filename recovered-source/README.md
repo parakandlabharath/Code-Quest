@@ -18,3 +18,8 @@ View your app in AI Studio: https://ai.studio/apps/5263a609-9e31-4ff5-846e-a486e
 2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
 3. Run the app:
    `npm run dev`
+
+
+## Security note
+
+The current challenge runner evaluates submitted JavaScript in the browser page context. It is suitable only for local experimentation with trusted code, not for a public multi-user coding platform. Do not deploy this feature publicly until code execution is moved into a properly isolated sandbox with strict resource limits and network restrictions. The leaderboard is currently in-memory and resets when the server restarts.
