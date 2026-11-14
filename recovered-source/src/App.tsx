@@ -11,13 +11,15 @@ import { AiChallengeCreator } from './components/AiChallengeCreator';
 import { MemeShop } from './components/MemeShop';
 import { soundFx } from './utils/audio';
 import { awardChallengeReward, awardLessonReward, spendCoins } from './utils/progress';
-import { Award, Flame, Coins, Sparkles, CheckCircle2, User, X } from 'lucide-react';
+import { createCodeQuestBackup, parseCodeQuestBackup } from './utils/backup';
+import { Award, Flame, Coins, Sparkles, CheckCircle2, User, X, Download, Upload } from 'lucide-react';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<'puzzles' | 'tutorials' | 'leaderboard' | 'ai_creator' | 'shop'>('puzzles');
   const [selectedDifficulty, setSelectedDifficulty] = useState<DifficultyLevel>('beginner');
   const [soundEnabled, setSoundEnabled] = useState<boolean>(true);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState<boolean>(false);
+  const [backupMessage, setBackupMessage] = useState<string>('');
 
   // Challenges State
   const [challenges, setChallenges] = useState<Challenge[]>(() => {
@@ -96,6 +98,31 @@ export default function App() {
       localStorage.setItem('codejester_custom_challenges', JSON.stringify(customOnly));
       return updated;
     });
+  };
+
+  const handleExportBackup = () => {
+    const customChallenges = challenges.filter((challenge) =>
+      challenge.id.startsWith('gen_') || challenge.id.startsWith('ai_')
+    );
+    const blob = new Blob([createCodeQuestBackup(userProfile, customChallenges)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = `code-quest-backup-${new Date().toISOString().slice(0, 10)}.json`;
+    anchor.click();
+    URL.revokeObjectURL(url);
+    setBackupMessage('Backup downloaded. Keep a copy outside this device.');
+  };
+
+  const handleImportBackup = async (file: File) => {
+    try {
+      const parsed = parseCodeQuestBackup(JSON.parse(await file.text()));
+      setUserProfile(parsed.profile);
+      setChallenges([...INITIAL_CHALLENGES, ...parsed.customChallenges]);
+      setBackupMessage('Backup restored successfully.');
+    } catch (error) {
+      setBackupMessage(error instanceof Error ? error.message : 'Could not restore this backup.');
+    }
   };
 
   return (
@@ -231,6 +258,29 @@ export default function App() {
                   <span className="text-emerald-400">{userProfile.solvedIds.length} Puzzles</span>
                 </div>
               </div>
+
+              <div className="grid grid-cols-2 gap-2 pt-2 border-t border-slate-800">
+                <button
+                  onClick={handleExportBackup}
+                  className="flex items-center justify-center gap-2 rounded-xl bg-emerald-500/15 border border-emerald-500/30 px-3 py-2.5 text-emerald-300 font-bold hover:bg-emerald-500/25"
+                >
+                  <Download className="w-4 h-4" /> Export Backup
+                </button>
+                <label className="flex items-center justify-center gap-2 rounded-xl bg-cyan-500/15 border border-cyan-500/30 px-3 py-2.5 text-cyan-300 font-bold hover:bg-cyan-500/25 cursor-pointer">
+                  <Upload className="w-4 h-4" /> Restore Backup
+                  <input
+                    type="file"
+                    accept="application/json,.json"
+                    className="hidden"
+                    onChange={(event) => {
+                      const file = event.target.files?.[0];
+                      if (file) void handleImportBackup(file);
+                      event.currentTarget.value = '';
+                    }}
+                  />
+                </label>
+              </div>
+              {backupMessage && <p className="text-[11px] text-cyan-300" role="status">{backupMessage}</p>}
 
               <div>
                 <label className="block text-slate-400 mb-1">Unlocked Badges ({userProfile.unlockedBadges.length}):</label>
