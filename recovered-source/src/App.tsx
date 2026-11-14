@@ -10,7 +10,7 @@ import { Leaderboard } from './components/Leaderboard';
 import { AiChallengeCreator } from './components/AiChallengeCreator';
 import { MemeShop } from './components/MemeShop';
 import { soundFx } from './utils/audio';
-import { awardChallengeReward } from './utils/progress';
+import { awardChallengeReward, awardLessonReward, spendCoins } from './utils/progress';
 import { Award, Flame, Coins, Sparkles, CheckCircle2, User, X } from 'lucide-react';
 
 export default function App() {
@@ -68,32 +68,14 @@ export default function App() {
   };
 
   const handleCompleteLesson = (lessonId: string, badgeName: string, xpReward: number) => {
-    setUserProfile((prev) => {
-      const alreadyUnlocked = prev.unlockedBadges.includes(badgeName);
-      const newBadges = alreadyUnlocked ? prev.unlockedBadges : [...prev.unlockedBadges, badgeName];
-      const newXp = alreadyUnlocked ? prev.xp : prev.xp + xpReward;
-      const newCoins = alreadyUnlocked ? prev.byteCoins : prev.byteCoins + 50;
-      const newLevel = Math.floor(newXp / 300) + 1;
-
-      return {
-        ...prev,
-        unlockedBadges: newBadges,
-        xp: newXp,
-        byteCoins: newCoins,
-        level: newLevel
-      };
-    });
+    setUserProfile((prev) => awardLessonReward(prev, lessonId, badgeName, xpReward));
   };
 
   const handleDeductCoins = (amount: number): boolean => {
-    if (userProfile.byteCoins >= amount) {
-      setUserProfile((prev) => ({
-        ...prev,
-        byteCoins: prev.byteCoins - amount
-      }));
-      return true;
-    }
-    return false;
+    const updated = spendCoins(userProfile, amount);
+    if (!updated) return false;
+    setUserProfile(updated);
+    return true;
   };
 
   const handleUpdateProfile = (updated: Partial<UserProfile>) => {
