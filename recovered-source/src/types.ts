@@ -81,6 +81,7 @@ export interface UserProfile {
   byteCoins: number;
   streakDays: number;
   solvedIds: string[];
+  completedLessonIds?: string[];
   unlockedBadges: string[];
   purchasedThemes: string[];
   activeTheme: 'light' | 'dark' | 'cyberpunk' | 'retro' | 'cozy';
