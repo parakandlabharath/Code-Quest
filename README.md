@@ -1,73 +1,88 @@
-# Code Quest — Team Task Management
+# Code Quest — Gamified Coding Practice
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Java-Backend-orange?logo=openjdk&logoColor=white" alt="Java backend" />
-  <img src="https://img.shields.io/badge/Spring%20Boot-Backend-6DB33F?logo=springboot&logoColor=white" alt="Spring Boot" />
-  <img src="https://img.shields.io/badge/REST%20API-Integration-005571" alt="REST API" />
-  <img src="https://img.shields.io/badge/Status-In%20Development-blue" alt="Project status" />
-</p>
+Code Quest (the recovered application branding currently says **CodeJester**) is a browser-based coding-practice playground. It combines coding challenges, short interactive lessons, a learner profile, a leaderboard, and optional AI-generated hints.
 
-Code Quest is a Java full-stack, Kanban-style task management project intended to help teams organize work across stages such as **To Do**, **In Progress**, and **Done**.
+> **Project status: in development.** The UI and learning flows are present. Secure execution of submitted code is intentionally disabled until an isolated server-side judge is implemented. Do not describe the code runner as working yet.
 
-## ✨ Intended features
+## What is currently in the source
 
-- **Kanban workflow** — organize tasks by status.
-- **Task updates** — move tasks through the workflow.
-- **REST API** — connect the frontend with backend endpoints.
-- **Browser interaction** — use JavaScript to communicate with the backend.
-- **Data access** — Spring Data JPA is listed in the project description.
+- Browse beginner, intermediate, and advanced JavaScript challenges.
+- Read interactive lessons and track earned profile rewards.
+- Store the learner profile and custom challenges in browser local storage.
+- View a leaderboard endpoint backed by in-memory server state.
+- Request optional AI hints, code feedback, and challenge generation when a Gemini API key is configured.
+- Run unit tests for challenge reward rules.
 
-> Note: Confirm each feature against the current implementation before describing it as tested or complete.
+## Technology
 
-## 🧰 Technology stack
+- React 19 + TypeScript
+- Vite 6
+- Express 4
+- Node.js 22
+- Optional Google Gemini API integration
 
-| Area | Technology |
-| --- | --- |
-| Language | Java |
-| Backend | Spring Boot |
-| Data access | Spring Data JPA |
-| Frontend interaction | JavaScript Fetch API |
-| API style | REST |
+The application is **not currently a Java/Spring Boot task-management application**. The recovered source is a JavaScript coding-practice product; this README describes the actual source tree.
 
-## 🚀 Getting started
+## Run locally
 
-The default branch currently exposes this README, but does not expose the application source or build files. Add those files before publishing verified installation commands.
+Prerequisites: Node.js 22 and npm.
 
-Once the source is committed:
-
-1. Clone this repository.
-2. Install the JDK and build tool required by the project.
-3. Configure the database and application settings, if needed.
-4. Run the application using its actual build configuration.
-5. Open the local URL printed by the application.
-
-## 🖼️ Screenshots and demo
-
-Add genuine screenshots from the running application to a `screenshots/` directory. Useful views include:
-
-- Main Kanban board
-- Task creation or editing
-- A task moving between workflow states
-
-Example for a real screenshot:
-
-```md
-![Code Quest Kanban board](screenshots/kanban-board.png)
+```bash
+git clone https://github.com/parakandlabharath/Code-Quest.git
+cd Code-Quest/recovered-source
+npm install
+npm run dev
 ```
 
-## 🗺️ Roadmap
+Open the local address printed in the terminal (normally `http://localhost:3000`).
 
-- [ ] Commit the application source and build configuration.
-- [ ] Verify setup on a clean clone.
-- [ ] Document API endpoints with example requests.
-- [ ] Add validation and error-handling tests.
-- [ ] Add sample configuration without credentials or secrets.
-- [ ] Add screenshots captured from the running application.
-- [ ] Choose and document an appropriate license.
+Optional AI features require a Gemini API key. Copy `.env.example` to `.env` and set `GEMINI_API_KEY`. Do not commit `.env` or API keys.
 
-## 🤝 Contributing
+## Validate changes
 
-1. Create a branch: `git checkout -b feature/your-change`
-2. Make a focused change.
-3. Commit with a descriptive message.
-4. Explain the change and testing in a pull request.
+```bash
+npm run lint
+npm test
+npm run build
+```
+
+GitHub Actions runs the type-check, unit tests, and production build for changes under `recovered-source/`.
+
+## Data and known limitations
+
+| Area | Current behavior | Limitation |
+| --- | --- | --- |
+| Learner profile | Browser local storage | Data is tied to that browser/device; export/backup is not implemented |
+| Custom challenges | Browser local storage | Clearing browser storage removes them |
+| Leaderboard | Express in-memory array | Resets when the server restarts; not a durable multi-user leaderboard |
+| Code submissions | Fail-closed response | No isolated execution service; arbitrary submitted code is not run |
+| AI endpoints | Gemini when configured, otherwise fallback responses | AI output is advisory and must be reviewed |
+
+Never use `eval()` or `new Function()` to enable the editor. A future code judge must run submissions in an isolated process/container with strict time, memory, filesystem, and network limits.
+
+## Architecture
+
+```text
+Browser (React)
+  ├── Challenges and lessons
+  ├── Profile and reward state (localStorage)
+  └── Express API calls
+        ├── Leaderboard (in-memory)
+        └── Optional Gemini AI endpoints
+```
+
+## Completion checklist
+
+- [x] Source tree recovered and separated under `recovered-source/`
+- [x] Type-check and production build workflow
+- [x] Unit tests for challenge reward rules
+- [x] Reward logic extracted into a small testable module
+- [ ] Secure isolated code execution and end-to-end challenge tests
+- [ ] Durable server-side profile and leaderboard storage
+- [ ] Validate all persisted browser data and AI response payloads
+- [ ] Capture screenshots from the locally running application and add them under `screenshots/`
+- [ ] Verify a clean-clone setup and record a real demo
+
+## Interview explanation
+
+The React application owns the learning experience and stores an individual learner profile in local storage. It calls an Express API for leaderboard and AI-assisted features. The reward rule is isolated in a pure TypeScript function so that duplicate challenge completion and XP/coin calculations can be tested independently. The most important unfinished engineering task is a secure, isolated code execution service; the current application deliberately refuses to execute arbitrary code.
