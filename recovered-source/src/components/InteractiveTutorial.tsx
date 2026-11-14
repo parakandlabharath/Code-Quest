@@ -80,7 +80,9 @@ export const InteractiveTutorial: React.FC<InteractiveTutorialProps> = ({
     }
   };
 
-  const isLessonCompleted = userProfile.unlockedBadges.includes(currentLesson.badgeReward.name);
+  const isLessonCompleted = userProfile.completedLessonIds
+    ? userProfile.completedLessonIds.includes(currentLesson.id)
+    : userProfile.unlockedBadges.includes(currentLesson.badgeReward.name);
 
   return (
     <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 text-slate-100">
@@ -91,7 +93,9 @@ export const InteractiveTutorial: React.FC<InteractiveTutorialProps> = ({
           Interactive Lessons ({lessons.length}):
         </span>
         {lessons.map((lsn, idx) => {
-          const completed = userProfile.unlockedBadges.includes(lsn.badgeReward.name);
+          const completed = userProfile.completedLessonIds
+            ? userProfile.completedLessonIds.includes(lsn.id)
+            : userProfile.unlockedBadges.includes(lsn.badgeReward.name);
           const isActive = idx === activeLessonIndex;
           return (
             <button
