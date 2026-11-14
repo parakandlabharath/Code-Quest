@@ -11,7 +11,7 @@ import { AiChallengeCreator } from './components/AiChallengeCreator';
 import { MemeShop } from './components/MemeShop';
 import { soundFx } from './utils/audio';
 import { awardChallengeReward, awardLessonReward, spendCoins } from './utils/progress';
-import { createCodeQuestBackup, parseCodeQuestBackup } from './utils/backup';
+import { createCodeQuestBackup, parseCodeQuestBackup, parseStoredProfile, parseStoredChallenges } from './utils/backup';
 import { Award, Flame, Coins, Sparkles, CheckCircle2, User, X, Download, Upload } from 'lucide-react';
 
 export default function App() {
@@ -26,7 +26,7 @@ export default function App() {
     const saved = localStorage.getItem('codejester_custom_challenges');
     if (saved) {
       try {
-        const parsed = JSON.parse(saved);
+        const parsed = parseStoredChallenges(JSON.parse(saved));
         return [...INITIAL_CHALLENGES, ...parsed];
       } catch {
         return INITIAL_CHALLENGES;
@@ -40,7 +40,8 @@ export default function App() {
     const saved = localStorage.getItem('codejester_user_profile');
     if (saved) {
       try {
-        return JSON.parse(saved);
+        const parsed = parseStoredProfile(JSON.parse(saved));
+        if (parsed) return parsed;
       } catch {
         // Fallback default
       }
