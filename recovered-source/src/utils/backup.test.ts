@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { createCodeQuestBackup, parseCodeQuestBackup } from './backup';
+import { createCodeQuestBackup, parseCodeQuestBackup, parseStoredProfile, parseStoredChallenges } from './backup';
 
 const profile = {
   username: 'Bharath', avatar: '🚀', titleBadge: 'Beginner', xp: 250,
@@ -26,4 +26,11 @@ test('rejects malformed backup data', () => {
   assert.throws(() => parseCodeQuestBackup({}), /valid Code Quest backup/);
   assert.throws(() => parseCodeQuestBackup({ version: 1, profile: { ...profile, xp: -10 }, customChallenges: [] }), /valid Code Quest backup/);
   assert.throws(() => parseCodeQuestBackup({ version: 1, profile, customChallenges: [{ id: 'evil' }] }), /valid Code Quest backup/);
+});
+
+test('safely restores valid legacy local storage and rejects malformed values', () => {
+  assert.equal(parseStoredProfile(profile)?.username, 'Bharath');
+  assert.equal(parseStoredProfile({ ...profile, byteCoins: -1 }), null);
+  assert.deepEqual(parseStoredChallenges([challenge, { id: 'bad' }]), [challenge]);
+  assert.deepEqual(parseStoredChallenges({}), []);
 });
