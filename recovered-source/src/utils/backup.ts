@@ -63,3 +63,15 @@ export function parseCodeQuestBackup(value: unknown): CodeQuestBackup {
     customChallenges: value.customChallenges,
   };
 }
+
+/** Safely restore a profile from the application's existing localStorage key. */
+export function parseStoredProfile(value: unknown): UserProfile | null {
+  if (!isValidProfile(value)) return null;
+  return { ...value, completedLessonIds: value.completedLessonIds ?? [] };
+}
+
+/** Ignore malformed custom challenge records instead of crashing the challenge list. */
+export function parseStoredChallenges(value: unknown): Challenge[] {
+  if (!Array.isArray(value)) return [];
+  return value.filter(isValidChallenge).slice(0, 200);
+}
