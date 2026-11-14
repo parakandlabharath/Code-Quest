@@ -350,7 +350,7 @@ export const PuzzleSolver: React.FC<PuzzleSolverProps> = ({
             {/* Sandbox Controls */}
             <div className="bg-slate-900 px-4 py-3 border-t border-slate-800 flex items-center justify-between">
               <span className="text-[11px] text-slate-400 font-mono uppercase tracking-wider">
-                JavaScript Sandbox
+                Secure code execution (not configured)
               </span>
 
               <div className="flex items-center space-x-3">
@@ -410,7 +410,7 @@ export const PuzzleSolver: React.FC<PuzzleSolverProps> = ({
                   </p>
                 ) : runResult.runtimeError ? (
                   <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-xs font-mono">
-                    ❌ Runtime Syntax Error: {runResult.runtimeError}
+                    ❌ Execution unavailable: {runResult.runtimeError}
                   </div>
                 ) : (
                   runResult.testResults.map((tr, idx) => (
