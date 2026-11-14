@@ -52,6 +52,7 @@ export default function App() {
       byteCoins: 120,
       streakDays: 3,
       solvedIds: [],
+      completedLessonIds: [],
       unlockedBadges: ['Semicolon Ninja'],
       purchasedThemes: ['dark'],
       activeTheme: 'dark'
