@@ -10,6 +10,7 @@ import { Leaderboard } from './components/Leaderboard';
 import { AiChallengeCreator } from './components/AiChallengeCreator';
 import { MemeShop } from './components/MemeShop';
 import { soundFx } from './utils/audio';
+import { awardChallengeReward } from './utils/progress';
 import { Award, Flame, Coins, Sparkles, CheckCircle2, User, X } from 'lucide-react';
 
 export default function App() {
@@ -63,21 +64,7 @@ export default function App() {
   }, [userProfile]);
 
   const handleSolveChallenge = (challengeId: string, xpReward: number, coinReward: number) => {
-    setUserProfile((prev) => {
-      const alreadySolved = prev.solvedIds.includes(challengeId);
-      const newSolvedIds = alreadySolved ? prev.solvedIds : [...prev.solvedIds, challengeId];
-      const newXp = alreadySolved ? prev.xp : prev.xp + xpReward;
-      const newCoins = alreadySolved ? prev.byteCoins : prev.byteCoins + coinReward;
-      const newLevel = Math.floor(newXp / 300) + 1;
-
-      return {
-        ...prev,
-        solvedIds: newSolvedIds,
-        xp: newXp,
-        byteCoins: newCoins,
-        level: newLevel
-      };
-    });
+    setUserProfile((prev) => awardChallengeReward(prev, challengeId, xpReward, coinReward));
   };
 
   const handleCompleteLesson = (lessonId: string, badgeName: string, xpReward: number) => {
