@@ -8,10 +8,10 @@ Code Quest (the recovered application branding currently says **CodeJester**) is
 
 - Browse beginner, intermediate, and advanced JavaScript challenges.
 - Read interactive lessons and track earned profile rewards.
-- Store the learner profile and custom challenges in browser local storage.
+- Store the learner profile and custom challenges in browser local storage, with validated JSON export/import backups.
 - View a leaderboard endpoint backed by in-memory server state.
 - Request optional AI hints, code feedback, and challenge generation when a Gemini API key is configured.
-- Run unit tests for challenge reward rules.
+- Run unit tests for challenge rewards, one-time lesson rewards, coin spending, and backup validation.
 
 ## Technology
 
@@ -52,8 +52,8 @@ GitHub Actions runs the type-check, unit tests, and production build for changes
 
 | Area | Current behavior | Limitation |
 | --- | --- | --- |
-| Learner profile | Browser local storage | Data is tied to that browser/device; export/backup is not implemented |
-| Custom challenges | Browser local storage | Clearing browser storage removes them |
+| Learner profile | Browser local storage plus JSON export/import | Manual backup is required to move data between devices |
+| Custom challenges | Browser local storage plus JSON export/import | Keep exported backup files outside the device |
 | Leaderboard | Express in-memory array | Resets when the server restarts; not a durable multi-user leaderboard |
 | Code submissions | Fail-closed response | No isolated execution service; arbitrary submitted code is not run |
 | AI endpoints | Gemini when configured, otherwise fallback responses | AI output is advisory and must be reviewed |
@@ -75,11 +75,12 @@ Browser (React)
 
 - [x] Source tree recovered and separated under `recovered-source/`
 - [x] Type-check and production build workflow
-- [x] Unit tests for challenge reward rules
+- [x] Unit tests for challenge rewards, lesson reward idempotency, coin spending, and backup validation
+- [x] Validated export/import for learner profile and custom challenges
 - [x] Reward logic extracted into a small testable module
 - [ ] Secure isolated code execution and end-to-end challenge tests
 - [ ] Durable server-side profile and leaderboard storage
-- [ ] Validate all persisted browser data and AI response payloads
+- [ ] Validate all legacy browser profile data and AI response payloads
 - [ ] Capture screenshots from the locally running application and add them under `screenshots/`
 - [ ] Verify a clean-clone setup and record a real demo
 
